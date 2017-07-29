@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TestChat</string>
+
+    <string name="main_screen_chat">Chat</string>
+    <string name="main_screen_live_chat">Live Chat</string>
+
+    <string name="id_kurse">Kurse</string>
+    <string name="id_comun">Community</string>
+    <string name="id_profile">Profile</string>
+    <string name="id_help">Help</string>
+
+    <string name="swipe_text">Remove</string>
+
+
+    <string name="time_yestarday">Yestarday</string>
+    <string name="time_today">Today</string>
+
+    <string name="menu_block">Block</string>
+</resources>

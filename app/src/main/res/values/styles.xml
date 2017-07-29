@@ -1,0 +1,49 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="StyledTextView">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="StyledTextViewTitle">
+        <item name="android:textColor">@color/textColorTitle</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+    </style>
+
+
+    <style name="StyledTextViewMess">
+        <item name="android:textSize">17sp</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:letterSpacing">-0.03</item>
+    </style>
+
+    <style name="StyledEditText">
+        <item name="android:theme">@style/StyledTilEditTextTheme</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/textColorHint</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:textSize">15sp</item>
+        <!--focus-->
+        <item name="android:textColorLink">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
+
+    <style name="StyledTilEditTextTheme">
+        <item name="android:textColorLink">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <!--<item name="android:textSize">@dimen/styledtil_edit_text_size</item>-->
+    </style>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSwitch">
+        <attr name="thumb_start" format="reference" />
+        <attr name="thumb_end" format="reference" />
+        <attr name="count_start" format="integer" />
+        <attr name="count_end" format="integer"/>
+    </declare-styleable>
+</resources>

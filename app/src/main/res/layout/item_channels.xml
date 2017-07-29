@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/cardChanel"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        card_view:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/leftBlock"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imgLogo"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="2dp"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="2dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgLogo">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        style="@style/StyledTextViewTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="-0.02"
+                        android:text="Denise Barnes" />
+
+                    <TextView
+                        android:id="@+id/tvMess"
+                        style="@style/StyledTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvName"
+                        android:letterSpacing="-0.02"
+                        android:text="Tousled food truck polaroid, salvia?" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_margin="11dp"
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tvCountMess"
+                    android:layout_alignParentTop="true"
+                    android:letterSpacing="-0.02"
+                    android:layout_toLeftOf="@+id/imgArrow"
+                    android:textSize="13sp"
+                    android:text="16:00" />
+
+
+                <ImageView
+                    android:id="@+id/imgArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvCountMess"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/imgArrow"
+                    android:background="@drawable/rec_blue"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="-0.02"
+                    android:text="1"
+                    android:layout_marginRight="11dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="1" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+</RelativeLayout>

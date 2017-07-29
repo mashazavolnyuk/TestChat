@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_kurse"
+        android:enabled="true"
+        android:icon="@drawable/ic_kurse"
+        android:title="@string/id_kurse"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/action_comunity"
+        android:enabled="true"
+        android:icon="@drawable/ic_community"
+        android:title="@string/id_comun"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/action_prof"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/id_profile"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/action_help"
+        android:enabled="true"
+        android:icon="@drawable/ic_help"
+        android:title="@string/id_help"
+        app:showAsAction="always|withText" />
+
+</menu>
