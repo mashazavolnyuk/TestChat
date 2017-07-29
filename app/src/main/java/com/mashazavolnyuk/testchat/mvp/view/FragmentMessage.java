@@ -13,10 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.mashazavolnyuk.testchat.App;
 import com.mashazavolnyuk.testchat.Constants;
 import com.mashazavolnyuk.testchat.R;
 import com.mashazavolnyuk.testchat.adapters.MessageAdapter;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IDataMessage;
+import com.mashazavolnyuk.testchat.di.component.DaggerMainComponent;
+import com.mashazavolnyuk.testchat.di.component.DaggerPresenterComponent;
+import com.mashazavolnyuk.testchat.di.module.ActivityModule;
+import com.mashazavolnyuk.testchat.di.module.PresenterChatModule;
+import com.mashazavolnyuk.testchat.di.module.PresenterMessModule;
 import com.mashazavolnyuk.testchat.mvp.model.MessageHeader.MessageHeader;
 import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
 import com.mashazavolnyuk.testchat.mvp.model.message.Message;
@@ -29,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -40,16 +48,14 @@ import static com.mashazavolnyuk.testchat.R.id.rcvMess;
  */
 
 public class FragmentMessage extends BaseFragment implements IViewMessages {
-
-
+    
     @BindView(rcvMess)
     RecyclerView viewMess;
-
     @BindView(imgCamera)
     ImageView imgGallery;
 
-
     MessageAdapter messageAdapter;
+    @Inject
     PresenterMessages presenterMessages;
     String title;
 
@@ -60,6 +66,11 @@ public class FragmentMessage extends BaseFragment implements IViewMessages {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
+        DaggerPresenterComponent.builder().
+                appComponent(App.getComponent()).
+                activityModule(new ActivityModule(getActivity()))
+                .presenterMessModule(new PresenterMessModule(this)).
+                build().inject(this);
         Bundle bundle =getArguments();
         title = bundle.getString(Constants.BUNDLE_FOR_MESS,"");
         unbinder = ButterKnife.bind(this, view);
@@ -71,7 +82,6 @@ public class FragmentMessage extends BaseFragment implements IViewMessages {
         messageAdapter = new MessageAdapter(getActivity(),null);
         viewMess.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewMess.setAdapter(messageAdapter);
-        presenterMessages = new PresenterMessages(this);
         loadData();
 
     }

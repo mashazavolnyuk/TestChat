@@ -22,9 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mashazavolnyuk.testchat.App;
 import com.mashazavolnyuk.testchat.R;
 import com.mashazavolnyuk.testchat.adapters.ChatAdapter;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IObserverClick;
+import com.mashazavolnyuk.testchat.di.component.DaggerMainComponent;
+import com.mashazavolnyuk.testchat.di.module.ActivityModule;
+import com.mashazavolnyuk.testchat.di.module.PresenterChatModule;
 import com.mashazavolnyuk.testchat.mvp.model.chanels.Channel;
 import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
 import com.mashazavolnyuk.testchat.mvp.presenter.PresenterChat;
@@ -32,6 +36,8 @@ import com.mashazavolnyuk.testchat.mvp.view.interfaces.IViewChat;
 import com.mashazavolnyuk.testchat.util.BottomNavigationViewHelper;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +56,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
     @BindView(bnvBar)
     BottomNavigationView bottomNavigationView;
     ChatAdapter chatAdapter;
+    @Inject
     PresenterChat presenterChat;
     public static final float ALPHA_FULL = 1.0f;
 
@@ -60,6 +67,11 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         unbinder = ButterKnife.bind(this, view);
+        DaggerMainComponent.builder().
+                appComponent(App.getComponent()).
+                activityModule(new ActivityModule(getActivity()))
+                .presenterChatModule(new PresenterChatModule(this)).
+                build().inject(this);
         start();
         return view;
     }
@@ -68,7 +80,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         chatAdapter = new ChatAdapter(getActivity(), this);
         viewChats.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewChats.setAdapter(chatAdapter);
-        presenterChat = new PresenterChat(this);
+      //  presenterChat = new PresenterChat(this);
         setUpItemTouchHelper();
         setUpAnimationDecoratorHelper();
         setListeners();
