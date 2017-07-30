@@ -5,6 +5,11 @@ package com.mashazavolnyuk.testchat;
  */
 
 public class Constants {
+
+    public static String CHAT = "chat";
+    public static String LIVE_CHAT = "liveChat";
+
+
     public static final String BUNDLE_FOR_MESS = "title";
     public static final String TIME_FORMAT = "HH:mm";
 }

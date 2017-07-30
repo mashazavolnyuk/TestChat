@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.transition.Transition;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -299,4 +300,5 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         super.onActivityCreated(savedInstanceState);
         getActivity().setTitle("Chat");
     }
+
 }

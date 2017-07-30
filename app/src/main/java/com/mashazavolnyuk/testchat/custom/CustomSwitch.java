@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
 import android.widget.Switch;
 
@@ -25,9 +26,6 @@ import static android.R.attr.bitmap;
 public class CustomSwitch extends Switch {
 
     Context context;
-
-
-
     private int count_right;
     private int count_left;
     private Drawable drawableThumb;
