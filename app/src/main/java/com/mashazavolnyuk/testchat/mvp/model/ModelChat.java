@@ -26,8 +26,8 @@ public class ModelChat implements IModelChat {
     List<Channel> data  ;
     IPresenterChat presenter;
 
-    public ModelChat(IPresenterChat iPresenterChat) {
-        this.presenter = iPresenterChat;
+    public ModelChat() {
+
     }
 
     @Override

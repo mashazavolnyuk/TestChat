@@ -23,11 +23,10 @@ public class ModelMess implements IModelMess {
     private String testLogin = "iostest";
     private String testPass = "iostest2k17!";
     List<Message> data;
-    IPresenterMessage presenter;
 
 
-    public ModelMess(IPresenterMessage iPresenterChat) {
-        this.presenter = iPresenterChat;
+
+    public ModelMess() {
     }
 
     @Override

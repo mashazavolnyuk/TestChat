@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by mashka on 28.07.17.
  */
@@ -27,10 +29,11 @@ public class PresenterMessages implements IPresenterMessage {
     String header;
     Date prevDate;
 
-
-    public PresenterMessages(IViewMessages iViewChat) {
+    @Inject
+    public PresenterMessages(IViewMessages iViewChat, ModelMess modelMess) {
         this.iViewMessages = iViewChat;
-        modelMess = new ModelMess(this);
+        this.modelMess = modelMess;/**/
+
 
     }
 
@@ -50,7 +53,7 @@ public class PresenterMessages implements IPresenterMessage {
         modelMess.load(new ICallBackRes() {
             @Override
             public void setData(List<? extends Object> data) {
-                res.setData( convert((List<? extends IDataMessage>) data));
+                res.setData(convert((List<? extends IDataMessage>) data));
 
 
             }
@@ -70,14 +73,14 @@ public class PresenterMessages implements IPresenterMessage {
 
         for (int i = 0; i < messages.size(); i++) {
             message = (Message) messages.get(i);
-            if (i == 0){
+            if (i == 0) {
                 converList.add(getFirstHeader(DataFormatter.formatDate(message.getCreateDate())));
-            converList.add(messages.get(i));}
-            else {
+                converList.add(messages.get(i));
+            } else {
                 MessageHeader messageHeader = getHeader(DataFormatter.formatDate(message.getCreateDate()));
                 if (messageHeader != null)
                     converList.add(messageHeader);
-                    converList.add(messages.get(i));
+                converList.add(messages.get(i));
             }
         }
         return converList;

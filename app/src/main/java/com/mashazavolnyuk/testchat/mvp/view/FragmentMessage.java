@@ -18,12 +18,10 @@ import com.mashazavolnyuk.testchat.Constants;
 import com.mashazavolnyuk.testchat.R;
 import com.mashazavolnyuk.testchat.adapters.MessageAdapter;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IDataMessage;
-import com.mashazavolnyuk.testchat.di.component.DaggerMainComponent;
-import com.mashazavolnyuk.testchat.di.component.DaggerPresenterComponent;
-import com.mashazavolnyuk.testchat.di.module.ActivityModule;
-import com.mashazavolnyuk.testchat.di.module.PresenterChatModule;
+import com.mashazavolnyuk.testchat.di.component.DaggerMessageComponent;
 import com.mashazavolnyuk.testchat.di.module.PresenterMessModule;
-import com.mashazavolnyuk.testchat.mvp.model.MessageHeader.MessageHeader;
+import com.mashazavolnyuk.testchat.mvp.model.ModelChat;
+import com.mashazavolnyuk.testchat.mvp.model.ModelMess;
 import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
 import com.mashazavolnyuk.testchat.mvp.model.message.Message;
 import com.mashazavolnyuk.testchat.mvp.presenter.PresenterMessages;
@@ -66,14 +64,10 @@ public class FragmentMessage extends BaseFragment implements IViewMessages {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
-        DaggerPresenterComponent.builder().
-                appComponent(App.getComponent()).
-                activityModule(new ActivityModule(getActivity()))
-                .presenterMessModule(new PresenterMessModule(this)).
-                build().inject(this);
         Bundle bundle =getArguments();
         title = bundle.getString(Constants.BUNDLE_FOR_MESS,"");
         unbinder = ButterKnife.bind(this, view);
+        DaggerMessageComponent.builder().appComponent(App.getComponent()).presenterMessModule(new PresenterMessModule(this,new ModelMess())).build().inject(this);
         start();
         return view;
     }

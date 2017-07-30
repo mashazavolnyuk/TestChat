@@ -9,6 +9,8 @@ import com.mashazavolnyuk.testchat.mvp.view.interfaces.IViewChat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by mashka on 27.07.17.
  */
@@ -19,10 +21,12 @@ public class PresenterChat implements IPresenterChat {
     ModelChat modelChat;
     List<Channel> channels;
 
-
-    public PresenterChat(IViewChat iViewChat) {
+    @Inject
+    public PresenterChat(IViewChat iViewChat,ModelChat modelChat) {
         this.iViewChat = iViewChat;
-        modelChat = new ModelChat(this);
+        this.modelChat =modelChat;
+      //  modelChat = new ModelChat();
+
         channels = new ArrayList<>();
     }
 

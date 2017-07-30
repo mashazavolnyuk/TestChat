@@ -26,9 +26,11 @@ import com.mashazavolnyuk.testchat.App;
 import com.mashazavolnyuk.testchat.R;
 import com.mashazavolnyuk.testchat.adapters.ChatAdapter;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IObserverClick;
+
 import com.mashazavolnyuk.testchat.di.component.DaggerMainComponent;
-import com.mashazavolnyuk.testchat.di.module.ActivityModule;
+import com.mashazavolnyuk.testchat.di.module.ModuleModelChat;
 import com.mashazavolnyuk.testchat.di.module.PresenterChatModule;
+import com.mashazavolnyuk.testchat.mvp.model.ModelChat;
 import com.mashazavolnyuk.testchat.mvp.model.chanels.Channel;
 import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
 import com.mashazavolnyuk.testchat.mvp.presenter.PresenterChat;
@@ -68,9 +70,9 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         unbinder = ButterKnife.bind(this, view);
         DaggerMainComponent.builder().
-                appComponent(App.getComponent()).
-                activityModule(new ActivityModule(getActivity()))
-                .presenterChatModule(new PresenterChatModule(this)).
+                appComponent(App.getComponent())
+                .moduleModelChat(new ModuleModelChat())
+                .presenterChatModule(new PresenterChatModule(this,new ModelChat())).
                 build().inject(this);
         start();
         return view;

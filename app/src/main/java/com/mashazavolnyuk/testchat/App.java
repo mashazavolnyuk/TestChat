@@ -1,5 +1,6 @@
 package com.mashazavolnyuk.testchat;
 
+
 import com.mashazavolnyuk.testchat.di.component.AppComponent;
 import com.mashazavolnyuk.testchat.di.component.DaggerAppComponent;
 
@@ -9,7 +10,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * Created by mashka on 27.07.17.
  */
 
-public class Application extends android.app.Application{
+public class App extends android.app.Application{
 
 
     private static AppComponent component;
