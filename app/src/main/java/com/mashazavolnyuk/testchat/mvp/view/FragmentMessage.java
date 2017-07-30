@@ -93,6 +93,7 @@ public class FragmentMessage extends BaseFragment implements IViewMessages {
             @Override
             public void setErrorMess(String errorMess) {
                 showToast(errorMess);
+                hideDialog();
             }
         });
     }

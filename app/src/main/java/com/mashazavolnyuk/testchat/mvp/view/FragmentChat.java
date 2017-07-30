@@ -107,6 +107,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
             @Override
             public void setErrorMess(String errorMess) {
                 showToast(errorMess);
+                hideDialog();
             }
         });
     }
