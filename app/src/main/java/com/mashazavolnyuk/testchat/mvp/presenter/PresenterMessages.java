@@ -12,6 +12,8 @@ import com.mashazavolnyuk.testchat.util.DataFormatter;
 import com.mashazavolnyuk.testchat.util.TimeChecker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -68,6 +70,7 @@ public class PresenterMessages implements IPresenterMessage {
     private List<IDataMessage> convert(List<? extends IDataMessage> messages) {
 
         List<IDataMessage> converList = new ArrayList<>();
+        Collections.reverse(messages);
         Message message;
 
 
@@ -93,8 +96,7 @@ public class PresenterMessages implements IPresenterMessage {
             header = iViewMessages.getContext().getResources().getString(R.string.time_yestarday);
         if (TimeChecker.isToday(date))
             header = iViewMessages.getContext().getResources().getString(R.string.time_today);
-        header = date.toString();
-
+        header = getSimpleHeader(date);
         messageHeader = new MessageHeader(header);
         prevDate = date;
         return messageHeader;
@@ -108,10 +110,20 @@ public class PresenterMessages implements IPresenterMessage {
         if (TimeChecker.isToday(date))
             messageHeader = new MessageHeader(iViewMessages.getContext().getResources().getString(R.string.time_today));
         else
-            messageHeader = new MessageHeader(date.toString());
+            messageHeader = new MessageHeader(getSimpleHeader(date));
 
         prevDate = date;
         return messageHeader;
+
+    }
+
+    private String getSimpleHeader(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return   " "+day +"/"+ month+ "/"+year;
 
     }
 

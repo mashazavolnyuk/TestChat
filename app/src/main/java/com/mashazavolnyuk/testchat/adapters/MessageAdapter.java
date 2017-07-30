@@ -123,7 +123,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void setNewData(List<IDataMessage> newData) {
         if (newData == null) return;
         messages = newData;
-        Collections.reverse(newData);
         notifyDataSetChanged();
     }
 
