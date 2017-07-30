@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mashazavolnyuk.testchat.App;
+import com.mashazavolnyuk.testchat.ICountObserver;
 import com.mashazavolnyuk.testchat.R;
 import com.mashazavolnyuk.testchat.adapters.ChatAdapter;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IObserverClick;
@@ -79,7 +80,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
     }
 
     private void start() {
-        chatAdapter = new ChatAdapter(getActivity(), this);
+        chatAdapter = new ChatAdapter(getActivity(), this, (ICountObserver) getActivity());
         viewChats.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewChats.setAdapter(chatAdapter);
       //  presenterChat = new PresenterChat(this);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mashazavolnyuk.testchat.ICountObserver;
 import com.mashazavolnyuk.testchat.R;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IObserverClick;
 import com.mashazavolnyuk.testchat.mvp.model.chanels.Channel;
@@ -36,6 +37,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     Context context;
     List<Channel> data;
     IObserverClick iObserverClick;
+    ICountObserver iCountObserver;
+    int count=0;
 
     public ChatAdapter(Context context) {
         this.context = context;
@@ -48,6 +51,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     }
 
+    public ChatAdapter(Context context, IObserverClick iObserverClick, ICountObserver iCountObserver) {
+        this.context = context;
+        this.iObserverClick = iObserverClick;
+        this.iCountObserver = iCountObserver;
+
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_channels, parent, false);
@@ -56,6 +66,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         Picasso.with(context).load(data.get(position).getLastMessage().getSender().getPhoto()).into(holder.logo);
         LastMessage lastMessage= data.get(position).getLastMessage();
         String title = lastMessage.getSender().getFirstName()+"  "+lastMessage.getSender().getLastName();
@@ -67,10 +78,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         if (countMess != 0) {
             holder.count.setVisibility(View.VISIBLE);
             holder.count.setText(String.valueOf(countMess));
+            iCountObserver.setCount(count+=countMess);
         }
         holder.card.setOnClickListener(v -> {
             if (iObserverClick != null) iObserverClick.click(title);
         });
+
     }
 
 

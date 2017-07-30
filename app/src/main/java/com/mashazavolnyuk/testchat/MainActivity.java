@@ -3,8 +3,10 @@ package com.mashazavolnyuk.testchat;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,12 +20,13 @@ import butterknife.ButterKnife;
 
 import static com.mashazavolnyuk.testchat.R.id.panelChat;
 import static com.mashazavolnyuk.testchat.R.id.panelLiveChat;
+import static com.mashazavolnyuk.testchat.R.id.toolbar;
 import static com.mashazavolnyuk.testchat.R.id.tvChat;
 import static com.mashazavolnyuk.testchat.R.id.tvCountChat;
 import static com.mashazavolnyuk.testchat.R.id.tvCountLiveChat;
 import static com.mashazavolnyuk.testchat.R.id.tvLiveChat;
 
-public class MainActivity extends AppCompatActivity implements INavigation {
+public class MainActivity extends AppCompatActivity implements INavigation,ICountObserver {
 
     FragmentManager fragmentManager;
     Fragment fragment;
@@ -118,5 +121,10 @@ public class MainActivity extends AppCompatActivity implements INavigation {
             finish();
         }
         super.onBackPressed();
+    }
+
+    @Override
+    public void setCount(int count) {
+        chatTextCount.setText(String.valueOf(count));
     }
 }

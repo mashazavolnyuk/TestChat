@@ -8,4 +8,5 @@ public interface INavigation{
     void toChannelsScreen();
     void toLiveChatsScreen();
     void toMessages(String title);
+
 }
