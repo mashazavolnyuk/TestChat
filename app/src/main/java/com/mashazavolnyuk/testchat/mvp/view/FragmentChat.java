@@ -1,6 +1,7 @@
 package com.mashazavolnyuk.testchat.mvp.view;
 
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.transition.Transition;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,7 +64,8 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
     ChatAdapter chatAdapter;
     @Inject
     PresenterChat presenterChat;
-    public static final float ALPHA_FULL = 1.0f;
+    private static final float MYTEXTSIZE = 20.0f;
+    int textSizePx;
 
 
     @Nullable
@@ -158,6 +161,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 View itemView = viewHolder.itemView;
+
                 Paint p = new Paint();
                 p.setColor(getActivity().getResources().getColor(R.color.colorPrimary));
                 // not sure why, but this method get's called for viewholder that are already swiped away
@@ -186,10 +190,14 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
                         (float) itemView.getBottom(), p);
                 Paint paint = new Paint();
                 paint.setColor(Color.WHITE);
-                paint.setTextSize(50);
+                // Get the screen's density scale
+                final float scale = getResources().getDisplayMetrics().density;
+// Convert the dps to pixels, based on density scale
+                textSizePx = (int) (MYTEXTSIZE * scale + 0.5f);
+                paint.setTextSize(textSizePx);
                 paint.setTextAlign(Paint.Align.CENTER);
                 String inbox = itemView.getContext().getResources().getString(R.string.swipe_text);
-                c.drawText(inbox, itemView.getRight() - 1200, itemView.getHeight() / 2, paint);
+      c.drawText(inbox, (float) (itemView.getX() - itemView.getX()+pxToDp(100)),  itemView.getY()+ pxToDp(50), paint); //
                 xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
 
                 xMark.draw(c);
@@ -201,6 +209,9 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         mItemTouchHelper.attachToRecyclerView(viewChats);
     }
 
+    private int pxToDp(int px) {
+        return (int) (px * Resources.getSystem().getDisplayMetrics().density);
+    }
     private void setUpAnimationDecoratorHelper() {
         viewChats.addItemDecoration(new RecyclerView.ItemDecoration() {
 

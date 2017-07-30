@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/layoutInfo"
+        android:background="@drawable/rec"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="43dp">
+        <RelativeLayout
+            android:id="@+id/panelChat"
+            android:background="@drawable/rec_white"
+            android:layout_alignParentLeft="true"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="100%">
+            <TextView
+                android:id="@+id/tvChat"
+                android:text="@string/main_screen_chat"
+                android:textSize="15sp"
+                android:textColor="#4a4a4a"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="0sp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginLeft="4dp"
+                android:visibility="visible"
+                android:id="@+id/tvCountChat"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvChat"
+                android:background="@drawable/rec_blue"
+                android:text="1"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="0sp"
+                tools:text="1" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/panelLiveChat"
+            android:background="@drawable/rec"
+            android:layout_alignParentRight="true"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="100%">
+            <TextView
+                android:id="@+id/tvLiveChat"
+                android:text="@string/main_screen_live_chat"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvCountLiveChat"
+                android:layout_marginLeft="4dp"
+                android:visibility="visible"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvLiveChat"
+                android:background="@drawable/rec_semi_transparent"
+                android:text="15"
+                android:textAlignment="center"
+                android:textColor="@color/dark_sky"
+                android:textSize="13sp"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="0sp"
+                tools:text="1" />
+        </RelativeLayout>
+    </android.support.percent.PercentRelativeLayout>
 </LinearLayout>

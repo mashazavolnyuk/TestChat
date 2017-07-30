@@ -8,7 +8,6 @@ import android.support.percent.PercentRelativeLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
     public void toChannelsScreen() {
 
         if (fragment instanceof FragmentChat) return;
-        addView(info);
+        showInfo();
         fragment = new FragmentChat();
         fragmentManager.beginTransaction().replace(R.id.content, fragment).addToBackStack(Constants.CHAT).commit();
         setStyleForChat();
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
     public void toLiveChatsScreen() {
 
         if (fragment instanceof FragmentLiveChat) return;
-        addView(info);
+        showInfo();
         fragment = new FragmentLiveChat();
         fragmentManager.beginTransaction().replace(R.id.content, fragment).addToBackStack(Constants.LIVE_CHAT).commit();
         setStyleForLiveChat();
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
     public void toMessages(String title) {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_FOR_MESS, title);
-        deletechildView();
+        hideInfo();
         fragment = new FragmentMessage();
         fragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.content, fragment).addToBackStack(fragment.getTag()).commit();
@@ -97,18 +96,8 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
     }
 
     private void setListeners() {
-        layoutChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toChannelsScreen();
-            }
-        });
-        layoutLiveChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toLiveChatsScreen();
-            }
-        });
+        layoutChat.setOnClickListener(v -> toChannelsScreen());
+        layoutLiveChat.setOnClickListener(v -> toLiveChatsScreen());
     }
 
     private void setStyleForChat() {
@@ -136,14 +125,13 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
         super.onBackPressed();
     }
 
-
     FragmentManager.OnBackStackChangedListener listener =new FragmentManager.OnBackStackChangedListener() {
         @Override
         public void onBackStackChanged() {
             Fragment fr = fragmentManager.findFragmentById(R.id.content);
             if(fr!=null){
                 if(fr instanceof FragmentChat || fr instanceof FragmentLiveChat)
-                    addView(info);
+                    showInfo();
                 Log.e("fragment=", fr.getClass().getSimpleName());
             }
         }
@@ -154,14 +142,13 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
         chatTextCount.setText(String.valueOf(count));
     }
 
+    private void hideInfo(){
+        mytoolbar.setVisibility(View.GONE);
 
-    private void deletechildView(){
-
-        mytoolbar.removeAllViews();
     }
 
-    private void addView(View view){
-        if(mytoolbar.getChildCount()==0)
-        mytoolbar.addView(view);
+    private void showInfo(){
+        mytoolbar.setVisibility(View.VISIBLE);
+
     }
 }
