@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,8 +17,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.transition.Transition;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +29,6 @@ import com.mashazavolnyuk.testchat.ICountObserver;
 import com.mashazavolnyuk.testchat.R;
 import com.mashazavolnyuk.testchat.adapters.ChatAdapter;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IObserverClick;
-
 import com.mashazavolnyuk.testchat.di.component.DaggerMainComponent;
 import com.mashazavolnyuk.testchat.di.module.ModuleModelChat;
 import com.mashazavolnyuk.testchat.di.module.PresenterChatModule;
@@ -57,6 +55,10 @@ import static com.mashazavolnyuk.testchat.R.id.rcvChat;
 
 public class FragmentChat extends BaseFragment implements IViewChat, IObserverClick {
 
+
+    private static final float MYTEXTSIZE = 18.0f;
+    private int textSizePx;
+
     @BindView(rcvChat)
     RecyclerView viewChats;
     @BindView(bnvBar)
@@ -64,9 +66,6 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
     ChatAdapter chatAdapter;
     @Inject
     PresenterChat presenterChat;
-    private static final float MYTEXTSIZE = 20.0f;
-    int textSizePx;
-
 
     @Nullable
     @Override
@@ -77,7 +76,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         DaggerMainComponent.builder().
                 appComponent(App.getComponent())
                 .moduleModelChat(new ModuleModelChat())
-                .presenterChatModule(new PresenterChatModule(this,new ModelChat())).
+                .presenterChatModule(new PresenterChatModule(this, new ModelChat())).
                 build().inject(this);
         start();
         return view;
@@ -87,7 +86,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         chatAdapter = new ChatAdapter(getActivity(), this, (ICountObserver) getActivity());
         viewChats.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewChats.setAdapter(chatAdapter);
-      //  presenterChat = new PresenterChat(this);
+        //  presenterChat = new PresenterChat(this);
         setUpItemTouchHelper();
         setUpAnimationDecoratorHelper();
         setListeners();
@@ -96,7 +95,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
     }
 
     private void loadData() {
-        showDialog("Please,wait", ProgressDialog.STYLE_SPINNER,false);
+        showDialog("Please,wait", ProgressDialog.STYLE_SPINNER, false);
         presenterChat.getData(new ICallBackRes() {
             @Override
             public void setData(List<? extends Object> data) {
@@ -194,10 +193,13 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
                 final float scale = getResources().getDisplayMetrics().density;
 // Convert the dps to pixels, based on density scale
                 textSizePx = (int) (MYTEXTSIZE * scale + 0.5f);
+                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-MediumItalic.ttf");
+                if (tf != null)
+                    paint.setTypeface(tf);
                 paint.setTextSize(textSizePx);
                 paint.setTextAlign(Paint.Align.CENTER);
                 String inbox = itemView.getContext().getResources().getString(R.string.swipe_text);
-      c.drawText(inbox, (float) (itemView.getX() - itemView.getX()+pxToDp(100)),  itemView.getY()+ pxToDp(50), paint); //
+                c.drawText(inbox, (float) (itemView.getX() - itemView.getX() + pxToDp(100)), itemView.getY() + pxToDp(50), paint); //
                 xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
 
                 xMark.draw(c);
@@ -212,6 +214,7 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
     private int pxToDp(int px) {
         return (int) (px * Resources.getSystem().getDisplayMetrics().density);
     }
+
     private void setUpAnimationDecoratorHelper() {
         viewChats.addItemDecoration(new RecyclerView.ItemDecoration() {
 
@@ -292,12 +295,10 @@ public class FragmentChat extends BaseFragment implements IViewChat, IObserverCl
         });
     }
 
-
     @Override
     public void click(String mess) {
         iNavigation.toMessages(mess);
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
