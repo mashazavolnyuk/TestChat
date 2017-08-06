@@ -3,7 +3,6 @@ package com.mashazavolnyuk.testchat.mvp.view;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,17 +19,11 @@ import com.mashazavolnyuk.testchat.adapters.MessageAdapter;
 import com.mashazavolnyuk.testchat.adapters.interfaces.IDataMessage;
 import com.mashazavolnyuk.testchat.di.component.DaggerMessageComponent;
 import com.mashazavolnyuk.testchat.di.module.PresenterMessModule;
-import com.mashazavolnyuk.testchat.mvp.model.ModelChat;
 import com.mashazavolnyuk.testchat.mvp.model.ModelMess;
 import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
-import com.mashazavolnyuk.testchat.mvp.model.message.Message;
 import com.mashazavolnyuk.testchat.mvp.presenter.PresenterMessages;
 import com.mashazavolnyuk.testchat.mvp.view.interfaces.IViewMessages;
-import com.mashazavolnyuk.testchat.util.DataFormatter;
-import com.mashazavolnyuk.testchat.util.TimeChecker;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,7 +39,7 @@ import static com.mashazavolnyuk.testchat.R.id.rcvMess;
  */
 
 public class FragmentMessage extends BaseFragment implements IViewMessages {
-    
+
     @BindView(rcvMess)
     RecyclerView viewMess;
     @BindView(imgCamera)
@@ -57,23 +50,21 @@ public class FragmentMessage extends BaseFragment implements IViewMessages {
     PresenterMessages presenterMessages;
     String title;
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_messages, container, false);
-        Bundle bundle =getArguments();
-        title = bundle.getString(Constants.BUNDLE_FOR_MESS,"");
+        Bundle bundle = getArguments();
+        title = bundle.getString(Constants.BUNDLE_FOR_MESS, "");
         unbinder = ButterKnife.bind(this, view);
-        DaggerMessageComponent.builder().appComponent(App.getComponent()).presenterMessModule(new PresenterMessModule(this,new ModelMess())).build().inject(this);
+        DaggerMessageComponent.builder().appComponent(App.getComponent()).presenterMessModule(new PresenterMessModule(this, new ModelMess())).build().inject(this);
         start();
         return view;
     }
 
     private void start() {
-        messageAdapter = new MessageAdapter(getActivity(),null);
+        messageAdapter = new MessageAdapter(getActivity(), null);
         viewMess.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewMess.setAdapter(messageAdapter);
         loadData();
@@ -81,13 +72,13 @@ public class FragmentMessage extends BaseFragment implements IViewMessages {
     }
 
     private void loadData() {
-        showDialog("Please,wait", ProgressDialog.STYLE_SPINNER,false);
+        showDialog("Please,wait", ProgressDialog.STYLE_SPINNER, false);
         presenterMessages.getData(new ICallBackRes() {
             @Override
             public void setData(List<? extends Object> data) {
                 if (data != null)
                     messageAdapter.setNewData((List<IDataMessage>) data);
-                    hideDialog();
+                hideDialog();
             }
 
             @Override
@@ -102,7 +93,6 @@ public class FragmentMessage extends BaseFragment implements IViewMessages {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_mess, menu);
-        return;
     }
 
     @Override

@@ -1,109 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardChanel"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="90dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
+    card_view:cardElevation="0dp">
 
-    <android.support.v7.widget.CardView
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:id="@+id/cardChanel"
+    <RelativeLayout
+        android:id="@+id/leftBlock"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        card_view:cardElevation="0dp">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imgLogo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="2dp"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imgLogo"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/leftBlock"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/StyledTextViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Denise Barnes" />
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/imgLogo"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="2dp"
-                    app:civ_border_color="@color/white"
-                    app:civ_border_width="2dp" />
+            <TextView
+                android:id="@+id/tvMess"
+                style="@style/StyledTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tousled food truck polaroid, salvia?" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imgLogo">
+        </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvName"
-                        style="@style/StyledTextViewTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:letterSpacing="-0.02"
-                        android:text="Denise Barnes" />
-
-                    <TextView
-                        android:id="@+id/tvMess"
-                        style="@style/StyledTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvName"
-                        android:letterSpacing="-0.02"
-                        android:text="Tousled food truck polaroid, salvia?" />
-                </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/imgArrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@mipmap/arrow" />
+        <ImageView
+            android:id="@+id/imgArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/arrow" />
 
 
-                <RelativeLayout
-                    android:layout_centerVertical="true"
-                    android:layout_margin="4dp"
-                    android:layout_toLeftOf="@+id/imgArrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp">
-                    <TextView
-                        android:id="@+id/tvDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/tvCountMess"
-                        android:layout_alignParentTop="true"
-                        android:letterSpacing="-0.02"
-                        android:textSize="13sp"
-                        android:text="16:00" />
-                    <TextView
-                        android:layout_centerHorizontal="true"
-                        android:visibility="gone"
-                        android:layout_marginBottom="16sp"
-                        android:id="@+id/tvCountMess"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/rec_blue"
-                        android:gravity="center_horizontal"
-                        android:letterSpacing="-0.02"
-                        android:text="1"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        tools:text="1" />
-                </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:layout_toLeftOf="@+id/imgArrow"
+            android:orientation="vertical"
+            android:gravity="right">
 
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16:00"
+                android:textSize="13sp" />
 
-            </RelativeLayout>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/tvCountMess"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginBottom="16sp"
+                android:background="@drawable/rec_blue"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="visible"
+                tools:text="1" />
 
+        </LinearLayout>
 
+    </RelativeLayout>
 
-</RelativeLayout>
+</android.support.v7.widget.CardView>

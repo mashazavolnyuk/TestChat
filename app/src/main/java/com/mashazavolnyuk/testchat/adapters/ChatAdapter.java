@@ -38,24 +38,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     List<Channel> data;
     IObserverClick iObserverClick;
     ICountObserver iCountObserver;
-    int count=0;
+    int count = 0;
 
     public ChatAdapter(Context context) {
         this.context = context;
-
     }
 
     public ChatAdapter(Context context, IObserverClick iObserverClick) {
         this.context = context;
         this.iObserverClick = iObserverClick;
-
     }
 
     public ChatAdapter(Context context, IObserverClick iObserverClick, ICountObserver iCountObserver) {
         this.context = context;
         this.iObserverClick = iObserverClick;
         this.iCountObserver = iCountObserver;
-
     }
 
     @Override
@@ -68,8 +65,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Picasso.with(context).load(data.get(position).getLastMessage().getSender().getPhoto()).into(holder.logo);
-        LastMessage lastMessage= data.get(position).getLastMessage();
-        String title = lastMessage.getSender().getFirstName()+"  "+lastMessage.getSender().getLastName();
+        LastMessage lastMessage = data.get(position).getLastMessage();
+        String title = lastMessage.getSender().getFirstName() + "  " + lastMessage.getSender().getLastName();
         holder.name.setText(title);
         holder.mess.setText(data.get(position).getLastMessage().getText());
         holder.date.setText(DataFormatter.formatString(data.get(position).getLastMessage().getCreateDate()));
@@ -78,14 +75,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         if (countMess != 0) {
             holder.count.setVisibility(View.VISIBLE);
             holder.count.setText(String.valueOf(countMess));
-            iCountObserver.setCount(count+=countMess);
+            iCountObserver.setCount(count += countMess);
         }
         holder.card.setOnClickListener(v -> {
             if (iObserverClick != null) iObserverClick.click(title);
         });
-
     }
-
 
     public void remove(int position) {
         data.remove(position);
@@ -94,7 +89,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (data == null) return 0;
+        if (data == null)
+            return 0;
         else
             return data.size();
     }
@@ -102,11 +98,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void setNewData(List<Channel> newData) {
         this.data = newData;
         notifyDataSetChanged();
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
 
         @BindView(cardChanel)
         CardView card;
@@ -129,8 +123,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-
-
         }
     }
 

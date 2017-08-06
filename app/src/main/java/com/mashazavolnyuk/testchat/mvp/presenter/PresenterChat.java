@@ -1,8 +1,8 @@
 package com.mashazavolnyuk.testchat.mvp.presenter;
 
-import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
 import com.mashazavolnyuk.testchat.mvp.model.ModelChat;
 import com.mashazavolnyuk.testchat.mvp.model.chanels.Channel;
+import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
 import com.mashazavolnyuk.testchat.mvp.presenter.intefaces.IPresenterChat;
 import com.mashazavolnyuk.testchat.mvp.view.interfaces.IViewChat;
 
@@ -19,20 +19,11 @@ public class PresenterChat implements IPresenterChat {
 
     IViewChat iViewChat;
     ModelChat modelChat;
-    List<Channel> channels;
 
     @Inject
-    public PresenterChat(IViewChat iViewChat,ModelChat modelChat) {
+    public PresenterChat(IViewChat iViewChat, ModelChat modelChat) {
         this.iViewChat = iViewChat;
-        this.modelChat =modelChat;
-      //  modelChat = new ModelChat();
-
-        channels = new ArrayList<>();
-    }
-
-    @Override
-    public void cleanData() {
-
+        this.modelChat = modelChat;
     }
 
     @Override

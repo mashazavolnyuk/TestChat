@@ -39,12 +39,6 @@ public class PresenterMessages implements IPresenterMessage {
 
     }
 
-
-    @Override
-    public void cleanData() {
-
-    }
-
     @Override
     public void setMess(String mess) {
         iViewMessages.showToast(mess);
@@ -55,7 +49,7 @@ public class PresenterMessages implements IPresenterMessage {
         modelMess.load(new ICallBackRes() {
             @Override
             public void setData(List<? extends Object> data) {
-                res.setData(convert((List<? extends IDataMessage>) data));
+                res.setData(addHeaderTime((List<? extends IDataMessage>) data));
 
 
             }
@@ -67,7 +61,7 @@ public class PresenterMessages implements IPresenterMessage {
         });
     }
 
-    private List<IDataMessage> convert(List<? extends IDataMessage> messages) {
+    private List<IDataMessage> addHeaderTime(List<? extends IDataMessage> messages) {
 
         List<IDataMessage> converList = new ArrayList<>();
         Collections.reverse(messages);
@@ -104,9 +98,13 @@ public class PresenterMessages implements IPresenterMessage {
 
     private MessageHeader getHeader(Date date) {
         MessageHeader messageHeader;
-        if (TimeChecker.isAtThisDay(prevDate, date)) return null;
-        else if (TimeChecker.isYesterday(date))
+
+        if (TimeChecker.isAtThisDay(prevDate, date))
+            return null;
+
+        if (TimeChecker.isYesterday(date))
             messageHeader = new MessageHeader(iViewMessages.getContext().getResources().getString(R.string.time_yestarday));
+
         if (TimeChecker.isToday(date))
             messageHeader = new MessageHeader(iViewMessages.getContext().getResources().getString(R.string.time_today));
         else

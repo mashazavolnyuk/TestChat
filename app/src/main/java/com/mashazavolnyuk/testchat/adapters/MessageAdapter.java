@@ -12,10 +12,7 @@ import com.mashazavolnyuk.testchat.adapters.interfaces.IDataMessage;
 import com.mashazavolnyuk.testchat.mvp.model.MessageHeader.MessageHeader;
 import com.mashazavolnyuk.testchat.mvp.model.message.Message;
 import com.mashazavolnyuk.testchat.util.DataFormatter;
-import com.mashazavolnyuk.testchat.util.TimeChecker;
 
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,7 +27,6 @@ import static com.mashazavolnyuk.testchat.R.id.tvMess;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
-
     private List<IDataMessage> messages;
     private Context context;
 
@@ -40,13 +36,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     private int myTestId = 1947; //test like I am owner
 
-
     public MessageAdapter(Context context, List<IDataMessage> iDataMessages) {
         this.context = context;
         this.messages = iDataMessages;
-
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -61,7 +54,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 View headerRow = LayoutInflater.from(context).inflate(R.layout.item_message_right, null);
                 return new OperatorHolder(headerRow);
 
-
             case ITEM_TYPE_TIME_HEADER:
                 View headerTime = LayoutInflater.from(context).inflate(R.layout.item_message_header, null);
                 return new HeaderTime(headerTime);
@@ -72,6 +64,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        //todo use switch
         if (holder.getItemViewType() == ITEM_TYPE_TIME_HEADER) {
             MessageHeader message = (MessageHeader) messages.get(position);
             HeaderTime visitor = (HeaderTime) holder;
@@ -95,29 +88,24 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public int getItemCount() {
         if (messages == null)
             return 0;
-        if (messages != null)
-            return messages.size();
-        return 0;
+        return messages.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         //I don't know my id like owner (its just like test task)
-       if(messages.get(position) instanceof MessageHeader)
-             return ITEM_TYPE_TIME_HEADER;
-        else {
-           if(messages.get(position) instanceof Message){
-               Message message = (Message) messages.get(position);
-               if(message.getSender().getId()== myTestId )
-                   return ITEM_TYPE_OWNER;
-               else
-                   return ITEM_TYPE_VISITOR;
+        if (messages.get(position) instanceof MessageHeader)
+            return ITEM_TYPE_TIME_HEADER;
 
-           }
-           return ITEM_TYPE_TIME_HEADER;
+        if (messages.get(position) instanceof Message) {
+            Message message = (Message) messages.get(position);
+            if (message.getSender().getId() == myTestId)
+                return ITEM_TYPE_OWNER;
+            else
+                return ITEM_TYPE_VISITOR;
         }
+        return ITEM_TYPE_TIME_HEADER;
     }
-
 
 
     public void setNewData(List<IDataMessage> newData) {
@@ -126,25 +114,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(imgLogo)
         CircleImageView logo;
 
         @BindView(tvMess)
         TextView mess;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
         }
     }
 
 
-    public class OperatorHolder extends ViewHolder {
-
+    class OperatorHolder extends ViewHolder {
+        //todo butterknife or not to all
         TextView date;
         TextView mess;
 
-        public OperatorHolder(View itemView) {
+        OperatorHolder(View itemView) {
             super(itemView);
             this.date = (TextView) itemView.findViewById(R.id.tvDate);
             this.mess = (TextView) itemView.findViewById(R.id.tvMess);
@@ -152,12 +140,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
-    public class Visitor extends ViewHolder {
+    class Visitor extends ViewHolder {
         CircleImageView logo;
         TextView mess;
 
-
-        public Visitor(View itemView) {
+        Visitor(View itemView) {
             super(itemView);
             this.logo = (CircleImageView) itemView.findViewById(R.id.imgLogo);
             this.mess = (TextView) itemView.findViewById(R.id.tvMess);
@@ -165,11 +152,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
 
-    public class HeaderTime extends ViewHolder {
+    class HeaderTime extends ViewHolder {
 
         TextView time;
 
-        public HeaderTime(View itemView) {
+        HeaderTime(View itemView) {
             super(itemView);
             this.time = (TextView) itemView.findViewById(R.id.tvHeader);
         }

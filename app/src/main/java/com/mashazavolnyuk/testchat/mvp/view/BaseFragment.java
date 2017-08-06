@@ -83,19 +83,20 @@ public class BaseFragment extends Fragment implements IBaseView {
 
     public void hideDialog() {
         if(dialog != null) {
-            if(dialog.isShowing()) { //check if dialog is showing.
-
-                //get the Context object that was used to great the dialog
-                Context context = ((ContextWrapper)dialog.getContext()).getBaseContext();
-
-                //if the Context used here was an activity AND it hasn't been finished or destroyed
-                //then dismiss it
-                if(context instanceof Activity) {
-                    if(!((Activity)context).isFinishing() && !((Activity)context).isDestroyed())
-                        dialog.dismiss();
-                } else //if the Context used wasnt an Activity, then dismiss it too
-                    dialog.dismiss();
-            }
+            dialog.dismiss();
+//            if(dialog.isShowing()) { //check if dialog is showing.
+//
+//                //get the Context object that was used to great the dialog
+//                Context context = ((ContextWrapper)dialog.getContext()).getBaseContext();
+//
+//                //if the Context used here was an activity AND it hasn't been finished or destroyed
+//                //then dismiss it
+//                if(context instanceof Activity) {
+//                    if(!((Activity)context).isFinishing() && !((Activity)context).isDestroyed())
+//                        dialog.dismiss();
+//                } else //if the Context used wasnt an Activity, then dismiss it too
+//                    dialog.dismiss();
+//            }
             dialog = null;
         }
     }

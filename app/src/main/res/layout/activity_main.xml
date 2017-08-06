@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.mashazavolnyuk.testchat.MainActivity">
+
     <include layout="@layout/top_panel"></include>
+
     <FrameLayout
         android:layout_below="@+id/topPanel"
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
 </RelativeLayout>

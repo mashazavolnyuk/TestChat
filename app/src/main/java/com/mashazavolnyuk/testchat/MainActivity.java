@@ -125,12 +125,12 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
         super.onBackPressed();
     }
 
-    FragmentManager.OnBackStackChangedListener listener =new FragmentManager.OnBackStackChangedListener() {
+    FragmentManager.OnBackStackChangedListener listener = new FragmentManager.OnBackStackChangedListener() {
         @Override
         public void onBackStackChanged() {
             Fragment fr = fragmentManager.findFragmentById(R.id.content);
-            if(fr!=null){
-                if(fr instanceof FragmentChat || fr instanceof FragmentLiveChat)
+            if (fr != null) {
+                if (fr instanceof FragmentChat || fr instanceof FragmentLiveChat)
                     showInfo();
                 Log.e("fragment=", fr.getClass().getSimpleName());
             }
@@ -142,12 +142,12 @@ public class MainActivity extends AppCompatActivity implements INavigation, ICou
         chatTextCount.setText(String.valueOf(count));
     }
 
-    private void hideInfo(){
+    private void hideInfo() {
         mytoolbar.setVisibility(View.GONE);
 
     }
 
-    private void showInfo(){
+    private void showInfo() {
         mytoolbar.setVisibility(View.VISIBLE);
 
     }

@@ -7,7 +7,6 @@ import com.mashazavolnyuk.testchat.mvp.model.interfaces.ICallBackRes;
  */
 
 public interface IBasePresenter {
-    void cleanData();
     void setMess(String mess);
     void getData(ICallBackRes res);
 }
