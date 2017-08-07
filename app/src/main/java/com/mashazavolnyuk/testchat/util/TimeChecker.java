@@ -23,10 +23,18 @@ public class TimeChecker {
     }
 
     public static boolean isAtThisDay(Date old, Date newDate) {
-        //todo rebuild to calendar
-        if (old.getYear() == newDate.getYear() && old.getMonth() == newDate.getMonth() && old.getDay() == newDate.getDay())
-            return true;
-        return false;
+
+      int time = old.compareTo(newDate);
+
+       switch (time){
+           case 1:
+               return false;
+           case -1:
+               return false;
+           case 0:
+               return true;
+       }
+       return false;
 
     }
 
