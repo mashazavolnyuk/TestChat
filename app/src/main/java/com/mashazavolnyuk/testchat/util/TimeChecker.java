@@ -9,11 +9,7 @@ import java.util.Date;
  */
 
 public class TimeChecker {
-
-    public static final int TODAY = 0;
-    public static final int YESTERDAY = 1;
-
-
+    
     public static boolean isYesterday(Date d) {
         return DateUtils.isToday(d.getTime() + DateUtils.DAY_IN_MILLIS);
     }
